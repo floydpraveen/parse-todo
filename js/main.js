@@ -4,8 +4,8 @@ require.config({
     // Libraries
     jquery: "lib/jquery",
     underscore: "lib/underscore",
-    firebase:"lib/firebase",
     backbone: "lib/backbone",
+    firebase:'lib/firebase',
     text:"lib/text",
     helper:"utils/helper"
   },
@@ -30,11 +30,17 @@ require([
     'jquery',
     'underscore',
     'backbone',
-    'views/app'
+    'views/app',
+    'firebase',
+    'firebaseAuth'
 ],
 
-function($, _, Backbone, App) {
+function($, _, Backbone, App, firebase, firebaseAuth) {
 
+   $.ajaxSetup({ beforeSend : function(xhr, settings){ 
+    xhr.setRequestHeader('X-Parse-Application-Id', 'xuxbStWSQTPbJhDA1rRt3Us0v6q8060YGkaWATur');
+    xhr.setRequestHeader('X-Parse-REST-API-Key', 'usZe6mcCugckQmjtWZpulgJ3CfHGluTk6mBZVs3B');
+  }});
   var app = new App();  
   console.log("require.js initializing the app ");
   

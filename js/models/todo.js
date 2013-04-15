@@ -2,13 +2,15 @@
 define(
 ['jquery',
 'underscore',
-'backbone'
+'backbone',
+'helper'
 ],
 
 function(
 $,
 _,
-Backbone
+Backbone,
+helper
 ) {
 
 var Todo = Backbone.Model.extend({
@@ -21,37 +23,7 @@ var Todo = Backbone.Model.extend({
     },
 
     initialize: function(){
-      this.on('change', this.changeState, this);
-    },
-
-    url:"https://floydpraveen.firebaseio.com/todolist.json",  
-
-    save: function(){
-       var model = this;
-       $.ajax({
-          type: "PUT",
-          url: "https://floydpraveen.firebaseio.com/todolist/"+model.get('id')+".json",
-          data: JSON.stringify( model.toJSON()),
-          success: function(e){
-          }
-        });
-    },
-
-     destroy: function(){
-           var model = this;
-           console.log("deleeing the model");
-           console.log(model.toJSON());
-           $.ajax({
-              type: "DELETE",
-              url: "https://floydpraveen.firebaseio.com/todolist/"+model.get('id')+".json",
-              success: function(e){
-                model.trigger('destroy');    
-              }
-            });
-    },
-
-    changeState:function(){
-      this.save();
+      this.set('id',this.get('objectId'), {silent:true});
     }
 
   });

@@ -1,4 +1,4 @@
 firebase-todo
 =============
 
-Another todo app, using firebase api and backbone js
+Another todo app, using parse api and backbone js

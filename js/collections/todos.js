@@ -3,14 +3,16 @@ define(
 ['jquery',
 'underscore',
 'backbone',
-'models/todo'
+'models/todo',
+'helper'
 ],
 
 function(
 $,
 _,
 Backbone,
-Todo
+Todo,
+helper
 ) {
 
  // The collection of todos is backed by *Firebase*.
@@ -19,27 +21,33 @@ Todo
     // Reference to this collection's model.
     model: Todo,
      // Save all of the todo items in a Firebase.
-    url:"https://floydpraveen.firebaseio.com/todolist.json",
+    url:helper.todosUrl,
 
-    initialize: function(){
-        this.bind('add', this.save, this);
+    initialize: function(options){
+      var self = this;
+      this.fetch({
+        success: function(response) {
+            var obj = self.toJSON();
+            self.reset();
+            self.add(obj[0].results, {silent:true});
+            self.bind('add', self.saveModel, self);
+            options.onComplete();
+        }
+      });
+     // this.bind('add', this.save, this);
         
         //this.bind('change', this.toggle, this);
     },
 
-    save: function(model){
-       console.log("saving the todo");
-       this.model.bind('destroy', this.removeFromList, this);
-       $.ajax({
-          type: "POST",
-          url: "https://floydpraveen.firebaseio.com/todolist.json",
-          data: JSON.stringify( model.toJSON()),
-          success: function(e){
-              console.log("saved todo");
-              console.log(e);
-              model.set({'id':e}, {silent:true});
-          }
-        });
+    saveModel: function(model){
+      console.log("inside save model");
+       model.save({},{
+        success:function(r){
+          console.log("saved model");
+          console.log(r);
+          model.set('id',model.get('objectId'));
+        }
+       });
     },
 
     toggle:function(model){
