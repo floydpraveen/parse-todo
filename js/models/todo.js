@@ -24,6 +24,14 @@ var Todo = Backbone.Model.extend({
 
     initialize: function(){
       this.set('id',this.get('objectId'), {silent:true});
+    },
+
+    toggle:function() {
+      this.save({done: !this.get("done")});
+    },
+
+    done:function(value){
+        this.save({done: value});
     }
 
   });

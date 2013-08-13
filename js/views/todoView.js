@@ -38,8 +38,6 @@ helper
     initialize: function() {
      this.model.bind('change', this.render, this);
      this.model.bind('destroy', this.removeTodo, this);
-    // this.model.bind('change', this.update, this);
-     // this.listenTo(this.model, 'remove', this.remove);
     },
 
     // Re-render the titles of the todo item.
@@ -53,7 +51,7 @@ helper
 
     // Toggle the `"done"` state of the model.
     toggleDone: function() {
-      this.model.set({done: !this.model.get("done")});
+      this.model.toggle();
     },
 
     // Switch this view into `"editing"` mode, displaying the input field.
@@ -85,13 +83,10 @@ helper
 
     // Remove the item from the collection.
     clear: function() {
-      helper.eventbus.trigger('deleteModel', this.model);
-     // this.model.destroy();
-      this.remove();
+      this.model.destroy();
     },
 
     removeTodo:function(){
-      console.log("removing todo from dom");
       this.remove();
     }
 

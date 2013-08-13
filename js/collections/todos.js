@@ -24,34 +24,15 @@ helper
     url:helper.todosUrl,
 
     initialize: function(options){
-      var self = this;
-      this.fetch({
-        success: function(response) {
-            var obj = self.toJSON();
-            self.reset();
-            self.add(obj[0].results, {silent:true});
-            self.bind('add', self.saveModel, self);
-            options.onComplete();
-        }
-      });
-     // this.bind('add', this.save, this);
-        
-        //this.bind('change', this.toggle, this);
+      this.bind('add', this.saveModel, this); 
     },
 
     saveModel: function(model){
-      console.log("inside save model");
        model.save({},{
         success:function(r){
-          console.log("saved model");
-          console.log(r);
           model.set('id',model.get('objectId'));
         }
        });
-    },
-
-    toggle:function(model){
-       model.save();
     },
 
     // Filter down the list of all todo items that are finished.
@@ -64,9 +45,8 @@ helper
       return this.without.apply(this, this.done());
     },
 
-    removeFromList:function(model){
-      console.log("remove this");
-      console.log(model.toJSON());
+    parse:function(data){
+      return data.results;       
     }
 
   });

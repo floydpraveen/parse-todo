@@ -44,27 +44,21 @@ helper
       helper.eventbus.on('deleteModel', this.deleteTodo, this);
       this.todos = new TodoList();
       this.input = this.$("#new-todo");
-     this.allCheckbox = this.$("#toggle-all")[0];
-
-     
-     this.todos.bind('reset', this.addAll, this);
-     
+      this.allCheckbox = this.$("#toggle-all")[0];     
+      this.todos.bind('reset', this.addAll, this); 
+      this.todos.bind('add', this.addOne, this);
+      this.todos.bind('remove', this.render, this);  
+      this.todos.bind('change', this.render, this);
 
       this.footer = this.$('footer');
       this.main = $('#main');
-      this.todos.fetch({
-        success: function(g, response) {
-            console.log("collection fetch success");
-        }
-      });
-     // this.main.show();
-     // this.footer.show();
+      this.todos.fetch();
+
     },
 
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
     render: function() {
-      console.log("render app again");
      var done = this.todos.done().length;
      var remaining = this.todos.remaining().length;
 
@@ -90,25 +84,12 @@ helper
 
     // Add all items in the **Todos** collection at once.
     addAll: function() {
-      var self =this;
-      var arrTodos = [];
-      console.log("inside add all");
-      if(this.todos.length>0){
-        $.each(this.todos.toJSON()[0], function(i, item){
-           if(item!==null){
-             arrTodos.push(new Todo({id:i, title:item.title, done:item.done}));
-          }     
-       });
-      }      
-      delete this.todos;
-      this.todos = new TodoList(arrTodos);
       this.todos.each(function(todo) {
-        self.addOne(todo);
+         var view = new TodoView({model: todo});
+        this.$("#todo-list").append(view.render().el);
       });
-      this.todos.bind('add', this.addOne, this);
-      this.todos.bind('change', this.render, this);
-      this.todos.bind('remove', this.render, this);
       this.render();
+
     },
 
     // If you hit return in the main input field, create new **Todo** model,
@@ -139,7 +120,7 @@ helper
     toggleAllComplete: function () {
       var done = this.allCheckbox.checked;
       this.todos.each(function (todo) { 
-        todo.set({'done': done}); 
+        todo.done(done); 
       });
     }
 
