@@ -27,11 +27,26 @@ var Todo = Backbone.Model.extend({
     },
 
     toggle:function() {
-      this.save({done: !this.get("done")});
+      var self = this;
+      var prev_done = this.get("done");
+      this.save({done: !this.get("done")},
+        {success:function(){
+
+        },
+        error:function(){
+            self.set('done',prev_done);
+        }
+    });
     },
 
     done:function(value){
-        this.save({done: value});
+        var self = this;
+        this.save({done: value},
+            {
+                error:function(){
+                    self.set('done',!value);
+                }
+            });
     }
 
   });

@@ -1,13 +1,14 @@
 require.config({
 
+  baseUrl: '../',
   paths: {
     // Libraries
-    jquery: "lib/jquery",
-    underscore: "lib/underscore",
-    backbone: "lib/backbone",
+    jquery: "js/lib/jquery",
+    underscore: "js/lib/underscore",
+    backbone: "js/lib/backbone",
   //  firebase:'lib/firebase',
-    text:"lib/text",
-    helper:"utils/helper"
+    text:"js/lib/text",
+    helper:"js/utils/helper"
   },
   
   shim: {
@@ -24,7 +25,7 @@ require.config({
 
   },
   
-  waitSeconds: 15
+  waitSeconds: 5
 
 });
 
@@ -32,7 +33,7 @@ require([
     'jquery',
     'underscore',
     'backbone',
-    'views/app'
+    'js/views/app'
 ],
 
 function($, _, Backbone, App ) {

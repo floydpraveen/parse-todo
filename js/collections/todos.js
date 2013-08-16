@@ -3,7 +3,7 @@ define(
 ['jquery',
 'underscore',
 'backbone',
-'models/todo',
+'js/models/todo',
 'helper'
 ],
 

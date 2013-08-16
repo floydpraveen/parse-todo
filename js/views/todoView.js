@@ -2,7 +2,7 @@ define(
 ['jquery',
 'underscore',
 'backbone',
-'text!templates/todo.html',
+'text!js/templates/todo.html',
 'helper'
 ],
 

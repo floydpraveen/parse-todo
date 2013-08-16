@@ -5,20 +5,22 @@ define(
         
         var run = function() {
 
-           module('About TODO Model', {
+		module('About TODO Model', {
 
-				setup: function() {
-					this.requests = [];
-					this.xhr = sinon.useFakeXMLHttpRequest();
-					this.xhr.onCreate = $.proxy(function(xhr) {
-						this.requests.push(xhr);
-					}, this);
-				},
-				teardown: function() {
-					this.xhr.restore();
-				}
+			setup: function() {
+				this.server = sinon.fakeServer.create();
+				this.server.respondWith("PUT", helper.todosUrl, [
+					200, {
+						"Content-Type": "application/json"
+					},
+					'[{"id": 0, "done": "Hello World"}]'
+				]);
 
-			});
+			},
+			teardown: function() {
+				this.server.restore();
+			}
+		});
 
            test('init of model shd set id using object id', function() {
 			    expect(1);
@@ -37,20 +39,30 @@ define(
 			    ok(spy.calledOnce, "A change event callback was correctly triggered");
 			});
 
-            test('model should be able to save the state', function() {
-			    expect(3);
+            test('model toggle its state on toggle called', function() {
+
+			    expect(1);
 			    var todo = new Todo();
 			    todo.set('done',true);
 			    todo.set('id',100);
 			    todo.url = helper.todosUrl;
-			    todo.save();
-			    var request = this.requests[0];
-			    equal(request.method, 'PUT', 'TestModel#save should send a PUT');
-			    equal(request.url, helper.todosUrl, '... to /api/testmodel/ endpoint');
-			    equal(JSON.parse(request.requestBody).done, true, '... with valid SMTP json');			    
+			    todo.toggle();
+			    this.server.respond();
+			    equal(todo.get('done'), false, 'with valid SMTP json');			    
+			});
+
+			 test('check the function done', function() {
+			    expect(1);
+			    var todo = new Todo();
+			    todo.set('done',true);
+			    todo.set('id',100);
+			    todo.url = helper.todosUrl;
+			    todo.done(false);
+			    this.server.respond();
+			    equal(todo.get('done'), false, 'with valid SMTP json');
 			});
 
         };        
-        return {run: run}
+        return run;
     }
 );

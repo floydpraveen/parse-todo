@@ -2,10 +2,10 @@ define(
 ['jquery',
 'underscore',
 'backbone',
-'text!templates/clearCompleted.html',
-'models/todo',
-'collections/todos',
-'views/todoView',
+'text!js/templates/clearCompleted.html',
+'js/models/todo',
+'js/collections/todos',
+'js/views/todoView',
 'helper'
 ],
 
@@ -63,12 +63,12 @@ helper
      var remaining = this.todos.remaining().length;
 
       if (this.todos.length) {
-        this.main.show();
-        this.footer.show();
+        this.main.show('slow');
+        this.footer.show('slow');
         this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
       } else {
-        this.main.hide();
-        this.footer.hide();
+        this.main.hide('slow');
+        this.footer.hide('slow');
       }
 
       this.allCheckbox.checked = !remaining;
@@ -99,7 +99,7 @@ helper
       if (!this.input.val()) return;
 
       this.todos.add(new Todo({title: this.input.val(), done:false }));
-      this.input.val('');
+      this.input.val('');bg
     },
 
     // Clear all done todo items.

@@ -40,16 +40,19 @@ require.config({
         deps: ["sinon", "jquery"],
         exports: 'sinonQunit'
       }
-    }
+    },
+    waitSeconds: 5
 });
 // require the unit tests.
 require(
-    ['QUnit', 'tests/models/todo_test'],
-    function(QUnit, todoModel) {
+    ['QUnit', 'tests/models/todo_test', 'tests/views/todoView_test'],
+    function(QUnit, todoModel, todoView) {
         // run the tests.
-        todoModel.run();
-        // start QUnit.
         QUnit.load();
         QUnit.start();
+        
+        todoModel();
+        todoView();
+       
     }
 );
