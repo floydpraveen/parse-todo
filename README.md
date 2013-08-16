@@ -1,9 +1,8 @@
 ## parse - todo
 
->A sample backbone app which shows how to use how to use 
-backbonejs + requirejs + qunit + sinonjs
-
->Yet to add grunt + phantomsjs
+>A sample backbone app which shows how to structure it using requirejs
+and test it using qunit + sinonjs.
+>Yet to add grunt + phantomjs
 
 >To run this app locally, follwo the commands below
  
