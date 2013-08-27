@@ -18,8 +18,8 @@ A sample backbone app with some best practices
 
 ###### To run tests via grunt run following commands
 
- - install phantomjs if you don't have: 'npm install phantomjs -g'
- - install grunt CLI :'npm install -g grunt-cli'
+ - install phantomjs if you don't have: `npm install phantomjs -g`
+ - install grunt CLI :`npm install -g grunt-cli`
  - install dependencies : `npm install` 
  + start grunt : `grunt`  (this will run jasmine test specs)
 
