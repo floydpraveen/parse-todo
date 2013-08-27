@@ -1,27 +1,16 @@
 module.exports = function(grunt) {
-
-  // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'), // the package file to use
+ 
      qunit: {
-        all: {
-          options: {
-            timeout: 10000,
-            urls: [
-              'http://localhost:3333/js/tests/index.html',
-            ]
-          }
-        }
+      all: ['tests/*.html'],
+      src: ['tests/index.html']
     }
   });
-
-  // Load the plugin that provides the "uglify" task.
- // grunt.loadNpmTasks('grunt-contrib-uglify');
- grunt.loadNpmTasks('grunt-contrib-qunit');
- grunt.registerTask('default', ['qunit']);
-
-  // Default task(s).
- // grunt.registerTask('default', ['uglify']);
-
+  // load up your plugins
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  // register one or more task lists (you should ALWAYS have a "default" task list)
+ grunt.registerTask('test', 'qunit:src');
+//  grunt.registerTask('taskName', ['taskToRun', 'anotherTask']);
 };
 
