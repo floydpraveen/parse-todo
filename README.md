@@ -5,9 +5,7 @@ A sample backbone app with some best practices
 ###### Libraries used 
 - Backbone.js (for MVC)
 - Require.js  (for AMD)
-- Jquery      (dom manipulation)
 - jasmine     (for unit testing)
-- QUnit        (for unit testing, just to check how different it is from jasmine)
 - run-jasmine.js ( to run jasmine tests via phantomjs [https://github.com/ariya/phantomjs/blob/master/examples/run-jasmine.js](https://github.com/ariya/phantomjs/blob/master/examples/run-jasmine.js))
 
 ###### To run this app locally, follwo the commands below
