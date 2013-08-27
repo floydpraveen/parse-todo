@@ -1,16 +1,34 @@
+
 module.exports = function(grunt) {
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'), // the package file to use
- 
-     qunit: {
-      all: ['tests/*.html'],
-      src: ['tests/index.html']
+    // connect: {
+    //   test: {
+    //     port: 8000,
+    //     middleware: function(connect) {
+    //       return [
+    //         mountFolder(connect, 'app')
+    //       ];
+    //     }
+    //   }
+    // },
+
+    // watch: {
+    //   files: ['jasmine/spec/**/*.js', 'app/**/*.js'],
+    //   tasks: 'exec'
+    // },
+
+    exec: {
+      jasmine: {
+        command: 'phantomjs jasmine/lib/run-jasmine.js jasmine/index.html',
+        stdout: true
+      }
     }
   });
-  // load up your plugins
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  // register one or more task lists (you should ALWAYS have a "default" task list)
- grunt.registerTask('test', 'qunit:src');
-//  grunt.registerTask('taskName', ['taskToRun', 'anotherTask']);
-};
 
+  grunt.loadNpmTasks('grunt-exec');
+ // grunt.loadNpmTasks('grunt-contrib-connect');
+ // grunt.loadNpmTasks('grunt-contrib-watch');
+
+  grunt.registerTask('default', ['exec']);
+
+}
