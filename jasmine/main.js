@@ -10,8 +10,11 @@ require.config({
     'jasmine-html': '../jasmine/lib/jasmine-html',
     spec: '../jasmine/spec/',
     text:"lib/text",
-    helper:"utils/helper"
+    helper:"utils/helper",
+    sinon:'../jasmine/lib/sinon', // FOR MOCKING AJAX 
+    consoleRunner:'../jasmine/lib/console-runner' //FOR PRINTING STACK TRACE ON COMMAND LINE
   },
+  
 
   shim: {
     underscore: {
@@ -27,6 +30,13 @@ require.config({
     'jasmine-html': {
       deps: ['jasmine'],
       exports: 'jasmine'
+    },
+    sinon: {
+        exports: 'sinon'
+    },
+    consoleRunner:{
+      deps: ['jasmine'],
+      exports:'consoleRunner'
     }
   }
 });
@@ -34,15 +44,17 @@ require.config({
 
 //window.store = "TestStore"; // override local storage store name - for testing
 
-require(['underscore', 'jquery', 'jasmine-html'], 
-function(_, $, jasmine){
+require(['underscore', 'jquery', 'jasmine-html', 'consoleRunner'], 
+function(_, $, jasmine, consoleRunner){
   console.log("loading jasmine");
   var jasmineEnv = jasmine.getEnv();
   jasmineEnv.updateInterval = 1000;
 
-  var htmlReporter = new jasmine.HtmlReporter();
+  var htmlReporter = new jasmine.HtmlReporter(),
+      consoleReporter = new jasmine.ConsoleReporter();
 
-  jasmineEnv.addReporter(htmlReporter);
+   jasmineEnv.addReporter(htmlReporter);
+   jasmineEnv.addReporter(consoleReporter);
 
   jasmineEnv.specFilter = function(spec) {
     return htmlReporter.specFilter(spec);
@@ -50,7 +62,8 @@ function(_, $, jasmine){
 
   var specs = [];
 
-  specs.push('spec/views/todoview_spec');
+  specs.push('spec/views/todoviewspec');
+  //specs.push('spec/models/model_spec');
 
 
   $(function(){
