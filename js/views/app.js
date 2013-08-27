@@ -99,7 +99,7 @@ helper
       if (!this.input.val()) return;
 
       this.todos.add(new Todo({title: this.input.val(), done:false }));
-      this.input.val('');bg
+      this.input.val('');
     },
 
     // Clear all done todo items.
