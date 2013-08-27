@@ -48,7 +48,14 @@ var Todo = Backbone.Model.extend({
                     self.set('done',!value);
                 }
             });
+    },
+
+    validate: function(attrs) {
+      if ( _.isEmpty(attrs.title) ) {
+        return "Missing Title";
+      }
     }
+
   });
 
 return Todo;
