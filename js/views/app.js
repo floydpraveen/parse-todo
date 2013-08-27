@@ -2,10 +2,10 @@ define(
 ['jquery',
 'underscore',
 'backbone',
-'text!js/templates/clearCompleted.html',
-'js/models/todo',
-'js/collections/todos',
-'js/views/todoView',
+'text!templates/clearCompleted.html',
+'models/todo',
+'collections/todos',
+'views/todoView',
 'helper'
 ],
 

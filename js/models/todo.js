@@ -22,7 +22,8 @@ var Todo = Backbone.Model.extend({
         done: null
     },
 
-    initialize: function(){
+    initialize: function(options){
+      $.extend(this,options)
      this.set('id',this.get('objectId'), {silent:true});
     },
 
@@ -48,7 +49,6 @@ var Todo = Backbone.Model.extend({
                 }
             });
     }
-
   });
 
 return Todo;
