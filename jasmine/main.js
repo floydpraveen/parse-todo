@@ -1,5 +1,5 @@
 require.config({
-  baseUrl: "../js",
+  baseUrl: "../app",
   //urlArgs: 'cb=' + Math.random(),
 
   paths: {
