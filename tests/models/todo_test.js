@@ -1,6 +1,6 @@
 
 define(
-    ['js/models/todo',  'sinonQunit','helper'],
+    ['models/todo',  'sinonQunit','helper'],
     function(Todo,  sinonQunit, helper) {
         
         var run = function() {

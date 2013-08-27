@@ -1,5 +1,5 @@
 define(
-    ['js/models/todo', 'js/views/todoView', 'helper'],
+    ['models/todo', 'views/todoView', 'helper'],
     function(Todo, TodoView, helper) {
 
         var run = function() {

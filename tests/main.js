@@ -1,16 +1,18 @@
 "use strict";
 require.config({
 
-    baseUrl: '../',
-    paths: {
-    QUnit: 'tests/vendor/qunit',
-    sinon:'tests/vendor/sinon',
-    sinonQunit:'tests/vendor/sinonQunit',
-    jquery: "js/lib/jquery",
-    underscore: "js/lib/underscore",
-    backbone: "js/lib/backbone",
-    text:"js/lib/text",
-    helper:"js/utils/helper"
+    baseUrl: '../js',
+
+    paths: {   
+    jquery: "lib/jquery",
+    underscore: "lib/underscore",
+    backbone: "lib/backbone",
+    text:"lib/text",
+    helper:"utils/helper",
+    QUnit: '../tests/vendor/qunit',
+    sinon:'../tests/vendor/sinon',
+    sinonQunit:'../tests/vendor/sinonQunit',
+    tests:'../tests/'
     },
 
     
