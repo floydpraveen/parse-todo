@@ -54,7 +54,7 @@ function(_, $, jasmine, consoleRunner){
       consoleReporter = new jasmine.ConsoleReporter();
 
    jasmineEnv.addReporter(htmlReporter);
- //  jasmineEnv.addReporter(consoleReporter);
+   jasmineEnv.addReporter(consoleReporter);
 
   jasmineEnv.specFilter = function(spec) {
     return htmlReporter.specFilter(spec);
