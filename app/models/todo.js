@@ -13,7 +13,7 @@ Backbone,
 helper
 ) {
 
-var Todo = Backbone.Model.extend({
+ var Todo = Backbone.Model.extend({
 
     // Default attributes for the todo item.
     defaults :{
@@ -51,12 +51,19 @@ var Todo = Backbone.Model.extend({
     },
 
     sync:function(method, model, option){
+      console.log("inside sync");
       var self = this;
       //ON SAVE, SEND A CALL BACK FUNC, WHICH WILL SET OBJECTID AS ID OF CREATED MODEL
       if(method=='create'){
-        $(option,function(data,msg){
-           self.id = data.objectId;
-        });
+        option.wait = true;
+        option.success = function(resp, status, xhr){
+           console.log("success callback");
+           self.id = resp.objectId
+           delete self.objectId;
+        };
+        option.error = function(){
+           self.destroy();
+        };
       }
       Backbone.sync(method, model, option);
     }
