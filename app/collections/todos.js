@@ -24,15 +24,6 @@ helper
     url:helper.todosUrl,
 
     initialize: function(options){
-      this.bind('add', this.saveModel, this); 
-    },
-
-    saveModel: function(model){
-       model.save({},{
-        success:function(r){
-          model.set('id',model.get('objectId'));
-        }
-       });
     },
 
     // Filter down the list of all todo items that are finished.

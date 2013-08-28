@@ -19,7 +19,7 @@ var Todo = Backbone.Model.extend({
     defaults :{
         id:null,
         title: null,
-        done: null
+        done: false
     },
 
     initialize: function(options){
@@ -40,7 +40,7 @@ var Todo = Backbone.Model.extend({
     });
     },
 
-    done:function(value){
+    markComplete:function(value){
         var self = this;
         this.save({done: value},
             {
@@ -50,10 +50,15 @@ var Todo = Backbone.Model.extend({
             });
     },
 
-    validate: function(attrs) {
-      if ( _.isEmpty(attrs.title) ) {
-        return "Missing Title";
+    sync:function(method, model, option){
+      var self = this;
+      //ON SAVE, SEND A CALL BACK FUNC, WHICH WILL SET OBJECTID AS ID OF CREATED MODEL
+      if(method=='create'){
+        $(option,function(data,msg){
+           self.id = data.objectId;
+        });
       }
+      Backbone.sync(method, model, option);
     }
 
   });
