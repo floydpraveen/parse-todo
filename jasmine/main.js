@@ -54,7 +54,7 @@ function(_, $, jasmine, consoleRunner){
       consoleReporter = new jasmine.ConsoleReporter();
 
    jasmineEnv.addReporter(htmlReporter);
-   jasmineEnv.addReporter(consoleReporter);
+ //  jasmineEnv.addReporter(consoleReporter);
 
   jasmineEnv.specFilter = function(spec) {
     return htmlReporter.specFilter(spec);
@@ -63,7 +63,7 @@ function(_, $, jasmine, consoleRunner){
   var specs = [];
 
   specs.push('spec/views/todoviewspec');
-  //specs.push('spec/models/model_spec');
+  specs.push('spec/models/modelspec');
 
 
   $(function(){
