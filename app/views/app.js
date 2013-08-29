@@ -98,7 +98,7 @@ helper
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
-      this.todos.create(new Todo({title: this.input.val(), done:false }), {wait: true});
+      this.todos.create(new Todo({title: this.input.val(), done:false }));
       this.input.val('');
     },
 

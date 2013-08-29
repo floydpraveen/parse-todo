@@ -51,17 +51,15 @@ helper
     },
 
     sync:function(method, model, option){
-      console.log("inside sync");
       var self = this;
       //ON SAVE, SEND A CALL BACK FUNC, WHICH WILL SET OBJECTID AS ID OF CREATED MODEL
       if(method=='create'){
         option.wait = true;
         option.success = function(resp, status, xhr){
-           console.log("success callback");
            self.id = resp.objectId
            delete self.objectId;
         };
-        option.error = function(){
+        option.error = function(a, b){
            self.destroy();
         };
       }
