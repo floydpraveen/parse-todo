@@ -1,12 +1,13 @@
 define(['models/todo', 'views/todoView', 'helper', 'sinon'],
 function(Todo, View, helper, sinon) {
 
-describe("TDOO model", function() {
-  var value, flag;
+describe("MODEL --TODO", function() {
+
   beforeEach(function() {
     this.server = sinon.fakeServer.create();
     this.todo = new Todo();
     this.todo.url = helper.todosUrl;
+    this.todo.set({'title':'foo'});
   });
     
   afterEach(function() {
@@ -63,46 +64,22 @@ describe("TDOO model", function() {
   })
 
    it('validation', function(){
-      this.server.respondWith("GET", helper.todosUrl,
-      [200, 
-      {"Content-Type": "application/json"},
-      '{"OK":"True"}',
-      '{"createdAt":"2013-08-28T06:03:50.275Z","objectId":"TVaq2Uk8Ns"}']);
-      // console.log("###########");
-      // this.todo.url = 'https://api.parse.com/1/classes/todos/';
-      this.todo.set('title','bkjdbe');
+      this.server.respondWith(
+        "POST",
+        helper.todosUrl,
+        [ 200,
+          {
+          "Content-Type": "application/json"
+          },
+          JSON.stringify({
+              "createdAt": "2013-08-29T08:11:03.213Z",
+              "objectId": "ZI9Ry6JqgE"
+          })
+        ]);
       this.todo.save();
-   // waits(1000);
-     // this.todo.save({title:'name'});
-      //this.server.respond(); 
-
-      console.log("###########");
-      console.log(this.todo.toJSON());
-      expect(this.todo.id).toBeUndefined();
+      this.server.respond();
+      expect(this.todo.id).toBeDefined();
   })
-
-   //changes for test
-
-   it("should support async execution of test preparation and exepectations", function() {
-
-    runs(function() {
-      flag = false;
-      value = 0;
-
-      setTimeout(function() {
-        flag = true;
-      }, 500);
-    });
-
-    waitsFor(function() {
-      value++;
-      return flag;
-    }, "The Value should be incremented", 750);
-
-    runs(function() {
-      expect(value).toBeGreaterThan(0);
-    });
-  });
 
 });
 

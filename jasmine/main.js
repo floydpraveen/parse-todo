@@ -47,6 +47,12 @@ require.config({
 require(['underscore', 'jquery', 'jasmine-html', 'consoleRunner'], 
 function(_, $, jasmine, consoleRunner){
   console.log("loading jasmine");
+  // set up for app
+  $.ajaxSetup({ beforeSend : function(xhr, settings){ 
+    xhr.setRequestHeader('X-Parse-Application-Id', 'xuxbStWSQTPbJhDA1rRt3Us0v6q8060YGkaWATur');
+    xhr.setRequestHeader('X-Parse-REST-API-Key', 'usZe6mcCugckQmjtWZpulgJ3CfHGluTk6mBZVs3B');
+  }});
+
   var jasmineEnv = jasmine.getEnv();
   jasmineEnv.updateInterval = 1000;
 
@@ -54,7 +60,7 @@ function(_, $, jasmine, consoleRunner){
       consoleReporter = new jasmine.ConsoleReporter();
 
    jasmineEnv.addReporter(htmlReporter);
-   jasmineEnv.addReporter(consoleReporter);
+  // jasmineEnv.addReporter(consoleReporter);
 
   jasmineEnv.specFilter = function(spec) {
     return htmlReporter.specFilter(spec);
