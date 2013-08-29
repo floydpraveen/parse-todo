@@ -16,10 +16,11 @@
     },
     "devDependencies": {
         "grunt-contrib-jasmine": "~0.4.0",
-        "grunt": "~0.4.0",
+        "grunt": "0.4.x",
+        "grunt-exec": "0.4.x",
+        "grunt-cli": "0.1.x",
         "grunt-contrib-jshint": "~0.2.0",
         "grunt-template-jasmine-requirejs": "~0.1.2",
-        "grunt-exec": "0.4.1",
     	"grunt-contrib-connect": "0.3.0",
     	"grunt-contrib-watch": "0.4.4"
     },
