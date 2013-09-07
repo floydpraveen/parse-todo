@@ -51,17 +51,6 @@ define(
 			    equal(todo.get('done'), false, 'with valid SMTP json');			    
 			});
 
-			 test('check the function done', function() {
-			    expect(1);
-			    var todo = new Todo();
-			    todo.set('done',true);
-			    todo.set('id',100);
-			    todo.url = helper.todosUrl;
-			    todo.done(false);
-			    this.server.respond();
-			    equal(todo.get('done'), false, 'with valid SMTP json');
-			});
-
         };        
         return run;
     }

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuites>
-<testsuite name="MODEL --TODO" errors="0" tests="4" failures="0" time="0.014" timestamp="2013-09-07T14:09:32">
-  <testcase classname="MODEL --TODO" name="should fire the change event" time="0.01"></testcase>
-  <testcase classname="MODEL --TODO" name="toggle the done value" time="0.001"></testcase>
-  <testcase classname="MODEL --TODO" name="toggle back to original value when server returns 404" time="0.001"></testcase>
-  <testcase classname="MODEL --TODO" name="validation" time="0.002"></testcase>
-</testsuite>
-</testsuites>

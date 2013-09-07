@@ -9,10 +9,11 @@ require.config({
     backbone: "lib/backbone",
     text:"lib/text",
     helper:"utils/helper",
-    QUnit: '../tests/vendor/qunit',
-    sinon:'../tests/vendor/sinon',
-    sinonQunit:'../tests/vendor/sinonQunit',
-    tests:'../tests/'
+    
+    QUnit: '../qunitTests/vendor/qunit',
+    sinon:'../qunitTests/vendor/sinon',
+    sinonQunit:'../qunitTests/vendor/sinonQunit',
+    tests:'../qunitTests/'
     },
 
     
