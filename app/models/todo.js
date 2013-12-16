@@ -23,6 +23,8 @@ helper
         done: false
     },
 
+    urlRoot:helper.todosUrl,
+
     initialize: function(options){
       $.extend(this,options)
      this.set('id',this.get('objectId'), {silent:true});
@@ -38,8 +40,23 @@ helper
         },
         error:function(){
             self.set('done',prev_done);
+            self.trigger('error');
         }
-    });
+      });
+    },
+
+    updateTitle:function(newTitle){
+      var prevTitle = this.get('title'),
+          self = this;
+       this.save({'title': newTitle},
+        {
+        success:function(){
+        },
+        error:function(){
+            self.set('title', prevTitle);
+            self.trigger('error');
+        }
+      });
     },
 
     markComplete:function(value){
@@ -49,6 +66,7 @@ helper
             {
                 error:function(){
                     self.set('done', prev_done);
+                    self.trigger('error');
                 }
             });
     },
@@ -59,13 +77,24 @@ helper
       if(method=='create'){
         option.wait = true;
         option.success = function(resp, status, xhr){
-           self.id = resp.objectId
+           self.id = resp.objectId;
+           model.trigger('create');
            delete self.objectId;
         };
         option.error = function(a, b){
+           self.trigger('error');
            self.destroy();
         };
+      }else if(method=='delete'){
+        option.wait = true;
+        option.success = function(resp, status, xhr){
+           self.trigger('destroy', model);
+        };
+        option.error = function(a, b){
+           self.trigger('error');
+        };
       }
+
       Backbone.sync(method, model, option);
     }
 

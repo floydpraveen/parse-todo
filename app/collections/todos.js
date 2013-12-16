@@ -24,6 +24,7 @@ helper
     url:helper.todosUrl,
 
     initialize: function(options){
+      this.bind('destroy', this.removeModel, this)
     },
 
     // Filter down the list of all todo items that are finished.
@@ -47,6 +48,10 @@ helper
         model.destroy();
         self.remove(model);
       });
+    },
+
+    removeModel:function(model){
+      this.remove(model);
     }
 
   });

@@ -41,7 +41,7 @@ helper
     // collection, when items are added or changed. Kick things off by
     // loading any preexisting todos that might be saved in *Firebase*.
     initialize: function() {
-      
+
       //COLLECTION FOR THIS TODOS
       this.todos = new TodoList();
       this.input = this.$("#new-todo");
@@ -54,9 +54,12 @@ helper
       this.todos.bind('remove', this.render, this);  
       //ON CHANGE OF MODEL UNDER COLLECTION, UPDATE THE STATS OF TODOS
       this.todos.bind('change', this.render, this);
+      //FOR ANY ERROR, SHOW A ERROR NOTE
+      this.todos.bind('error', this.showErrorNotes, this);
 
       this.footer = this.$('footer');
       this.main = $('#main');
+      this.$error = $('#error');
       this.todos.fetch();
 
     },
@@ -77,6 +80,7 @@ helper
       }
 
       this.allCheckbox.checked = !remaining;
+      this.hideErrorNotes();
     },
 
     // Add a single todo item to the list by creating a view for it, and
@@ -99,10 +103,12 @@ helper
     // If you hit return in the main input field, create new **Todo** model,
     // persisting it to *Firebase*.
     createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      if (!this.input.val()) return;
+      if (e.keyCode != 13) 
+        return;
+      if (!this.input.val()) 
+        return;
       //ADD TODO ITEM TO COLLECTION
-      this.todos.create(new Todo({title: this.input.val(), done:false }));
+      this.todos.create( new Todo({title: this.input.val(), done:false }) );
       this.input.val('');
     },
 
@@ -121,6 +127,15 @@ helper
       this.todos.each(function (todo) { 
         todo.markComplete(done); 
       });
+    },
+
+    showErrorNotes:function(){
+      this.$error.html('looks like connection error, please try after some time').show();
+    },
+
+    hideErrorNotes:function(){
+      this.$error.html('').hide();
+
     }
 
   });

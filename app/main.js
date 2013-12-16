@@ -47,7 +47,7 @@ function($, _, Backbone, App ) {
 
   var app = new App();  
   
-  console.log("require.js initializing the app ");
+  //console.log("require.js initializing the app ");
   
 });
 

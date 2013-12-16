@@ -45,7 +45,6 @@ helper
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.toggleClass('done', this.model.get('done'));
       this.input = this.$('.edit');
-     // console.log(this);
       return this;
     },
 
@@ -66,15 +65,15 @@ helper
       if (!value) {
         this.clear();
       } else {
-        this.model.set({title: value});
-        this.update();
+       // this.model.set({title: value});
+        this.model.updateTitle(value);
         this.$el.removeClass("editing");
       }
     },
 
-    update:function(){
-      this.model.save();
-    },
+    // updateTitle:function(){
+    //   this.model.save();
+    // },
 
     // If you hit `enter`, we're through editing the item.
     updateOnEnter: function(e) {
