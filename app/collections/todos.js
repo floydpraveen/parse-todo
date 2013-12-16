@@ -38,6 +38,15 @@ helper
 
     parse:function(data){
       return data.results;       
+    },
+
+    //TO REMOVE COMPLETED ITEMS FROM COLLECTION AND DELETE THEM
+    clearCompleted:function(){
+      var self = this;
+      this.done().forEach(function(model) {
+        model.destroy();
+        self.remove(model);
+      });
     }
 
   });

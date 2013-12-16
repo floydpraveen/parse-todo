@@ -1,4 +1,5 @@
 
+//MODEL FOR ONE TODO ITEM, HOLDS ALL THE DATA REQUIRED FOR A TODO
 define(
 ['jquery',
 'underscore',
@@ -31,7 +32,8 @@ helper
       var self = this;
       var prev_done = this.get("done");
       this.save({done: !this.get("done")},
-        {success:function(){
+        {
+        success:function(){
 
         },
         error:function(){
@@ -42,10 +44,11 @@ helper
 
     markComplete:function(value){
         var self = this;
+        var prev_done = this.get("done");
         this.save({done: value},
             {
                 error:function(){
-                    self.set('done',!value);
+                    self.set('done', prev_done);
                 }
             });
     },

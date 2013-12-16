@@ -41,13 +41,18 @@ helper
     // collection, when items are added or changed. Kick things off by
     // loading any preexisting todos that might be saved in *Firebase*.
     initialize: function() {
-      helper.eventbus.on('deleteModel', this.deleteTodo, this);
+      
+      //COLLECTION FOR THIS TODOS
       this.todos = new TodoList();
       this.input = this.$("#new-todo");
-      this.allCheckbox = this.$("#toggle-all")[0];     
+      this.allCheckbox = this.$("#toggle-all")[0];  
+      //ON ADDING MODELS TO COLLECTION AT ONCE, RENDER THEM AL TO DOM   
       this.todos.bind('reset', this.addAll, this); 
+      //ON ADDING EACH MODEL TO COLLECTION, RENDER IT
       this.todos.bind('add', this.addOne, this);
+      //ON REMOVING MODEL FROM COLLECTION, UPDATE THE STATS ABOUT TODOS
       this.todos.bind('remove', this.render, this);  
+      //ON CHANGE OF MODEL UNDER COLLECTION, UPDATE THE STATS OF TODOS
       this.todos.bind('change', this.render, this);
 
       this.footer = this.$('footer');
@@ -89,7 +94,6 @@ helper
         this.$("#todo-list").append(view.render().el);
       });
       this.render();
-
     },
 
     // If you hit return in the main input field, create new **Todo** model,
@@ -97,19 +101,14 @@ helper
     createOnEnter: function(e) {
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
-
+      //ADD TODO ITEM TO COLLECTION
       this.todos.create(new Todo({title: this.input.val(), done:false }));
       this.input.val('');
     },
 
     // Clear all done todo items.
     clearCompleted: function() {
-      var self = this;
-      this.todos.done().forEach(function(model) {
-         model.destroy();
-        self.todos.remove(model);
-      });
-      return false;
+      this.todos.clearCompleted();
     },
 
     deleteTodo:function(model){
